@@ -66,4 +66,4 @@ function indexOf(array, element){
     }
     return -1;
 }
-console.log(indexOf(arr, 3));
+console.log(indexOf(arr, 4));
