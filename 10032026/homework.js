@@ -5,7 +5,7 @@ let person1 = {
 };
 let person2 = {
     age: 28,
-    city: "Yerevan"
+    city: "Paris"
 };
 let mergedPerson = Object.assign({}, person1, person2);
 console.log(mergedPerson);
