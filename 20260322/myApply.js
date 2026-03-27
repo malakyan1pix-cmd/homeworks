@@ -1,5 +1,6 @@
 //myApply------------------------------------------------------------------------
 //arguments are accepted as an array
+//the rest works the same as call
 Function.prototype.myApply = function(thisArg, args) {
     if(thisArg === null || thisArg === undefined){
         thisArg = globalThis;
