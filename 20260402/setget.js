@@ -14,6 +14,9 @@ console.log(emp.fullname);
 
 //Task 2------------------------------------
 class Account {
+    constructor(password){
+        this._password = password;
+    }
     set password(value){
         if(value.length > 6){
             this._password = value;
@@ -33,6 +36,9 @@ console.log(acc.password);
 
 //Task 3------------------------------------
 class Temperature{
+    constructor(celsius){
+        this._celsius = celsius;
+    }
     set celsius(value){
         this._celsius = value;
     }
@@ -41,14 +47,14 @@ class Temperature{
     }
 }
 const temp = new Temperature();
-temp.celsius = 0;
+temp.celsius = 1;
 console.log(temp.fahrenheit);
 
 
 //Task 4------------------------------------
 class Counter {
-    constructor(){
-        this._count = 0;
+    constructor(count = 0){
+        this._count = count;
     }
     increment(){
         this._count++;
@@ -65,6 +71,9 @@ class Counter {
 
 //Task 5------------------------------------
 class Product {
+    constructor(price){
+        this._price = price;
+    }
     set price(value){
         this._price = value;
     }
@@ -79,8 +88,8 @@ console.log(p.price);
 
 //Task 6------------------------------------
 class BankAccount {
-    constructor(){
-    this._balance = 0;
+    constructor(balance = 0){
+    this._balance = balance;
     }
     set deposit(value){
         if(value > 0){
@@ -101,6 +110,10 @@ console.log(bank.balance);
 
 //Task 7------------------------------------
 class Rectangle {
+    constructor(width, heigth){
+        this._width = width;
+        this._height = heigth;
+    }
     set width(w){
         this._width = w;
     }
@@ -111,14 +124,15 @@ class Rectangle {
         return this._width * this._height;
     }
 }
-const  rect= new Rectangle();
-rect.width = 5;
-rect.heigth = 10;
+const  rect= new Rectangle(5, 10);
 console.log(rect.area);
 
 
 //Task 8------------------------------------
 class Email{
+    constructor(email){
+        this._email = email;
+    }
     set email(value){
         if(value.includes("@")){
             this._email = value;
@@ -142,6 +156,10 @@ class Cart{
         this._total = 0;
     }
     set add(value){
+        if(value < 0){
+            console.log("Invalid price");
+            return;
+        }
         this._total += value;
     }
     get total(){
@@ -156,6 +174,9 @@ console.log(cart.total);
 
 //Task 10-----------------------------------
 class Car{
+    constructor(spreed){
+        this._spreed = spreed;
+    }
     set spreed(value){
         if(value <= 200){
             this._spreed = value;
@@ -167,7 +188,7 @@ class Car{
         return this._spreed;
     }
 }
-const car = new Car();
-car.spreed = 180;
+const car = new Car(180);
+console.log(car.spreed);
 car.spreed = 250;
 console.log(car.spreed);
