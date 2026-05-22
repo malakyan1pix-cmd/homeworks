@@ -19,5 +19,6 @@ function searchString(arr, target, start = 0, end = arr.length - 1){
 
 const arr1 = ["apple", "banana", "kiwi", "orange"];
 const target1 = "kiwi";
+
 console.log(searchString(arr1, target1));
 

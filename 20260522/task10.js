@@ -22,4 +22,5 @@ function searchInsert(arr, target){
 
 const arr = [1, 3, 5, 7];
 const target = 4;
+
 console.log(searchInsert(arr, target));

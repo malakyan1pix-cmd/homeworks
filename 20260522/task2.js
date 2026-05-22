@@ -15,6 +15,6 @@ function insertionSortDescending(arr){
     return arr;
 }
 
-
 const arr = [4, 1, 8, 3];
+
 console.log(insertionSortDescending(arr));

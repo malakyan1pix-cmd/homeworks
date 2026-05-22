@@ -15,6 +15,6 @@ function insertionSort(arr){
     return arr;
 }
 
-
 const arr = [5, 2, 9, 1, 7];
+
 console.log(insertionSort(arr));

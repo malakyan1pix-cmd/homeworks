@@ -15,10 +15,10 @@ function insertionSortObjects(arr){
     return arr;
 }
 
-
 const arr = [
   { name: "Anna", age: 22 },
   { name: "John", age: 18 },
   { name: "Mike", age: 30 }
 ]
+
 console.log(insertionSortObjects(arr));

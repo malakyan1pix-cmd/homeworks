@@ -14,5 +14,6 @@ function  insertionSortVisualize(arr){
 }
 
 const arr = [5, 2, 4, 1];
+
 insertionSortVisualize(arr);
 

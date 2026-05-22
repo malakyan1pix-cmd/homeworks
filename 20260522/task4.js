@@ -19,7 +19,7 @@ function binarySearch(arr, target){
     return -1;
 }
 
-
 const arr = [1, 3, 5, 7, 9];
 const target = 7;
+
 console.log(binarySearch(arr, target));

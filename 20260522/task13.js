@@ -17,4 +17,5 @@ function insertionSortRecursive(arr, n = arr.length){
 }
 
 const arr = [5, 2, 9, 1, 7];
+
 console.log(insertionSortRecursive(arr));

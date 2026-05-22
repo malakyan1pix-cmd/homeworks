@@ -24,9 +24,9 @@ function binarySearchRecursive(arr, target, start = 0, end = arr.length - 1, cal
 };
 }
 
-
 const arr = [1, 7, 10, 12, 17, 29, 32, 44, 63, 78, 84];
 const target = 84;
+
 console.log(binarySearchRecursive(arr, target));
 
 

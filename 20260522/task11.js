@@ -60,5 +60,6 @@ class SearchUtility{
 
 
 const utils = new SearchUtility();
+
 console.log(utils.insertionSort([4, 1, 3]));
 console.log(utils.iterativeBinarySearch([1, 2, 3], 2));
