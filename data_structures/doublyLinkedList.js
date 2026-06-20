@@ -239,7 +239,7 @@ class DoublyLinkedList{
             curr = curr.next;
         }
     }
-
+ 
     *reverseIterator(){
         let curr = this.#tail;
 

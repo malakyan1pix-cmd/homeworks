@@ -218,7 +218,7 @@ class SinglyLinkedList{
         }
         this.#head = prev;
     }
-
+ 
     *[Symbol.iterator](){
         if(this.empty()) return;
         let curr = this.#head;
