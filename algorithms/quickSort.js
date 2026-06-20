@@ -35,7 +35,7 @@ function partition1(arr, low, high){
 
     return i;
 }
-
+ 
 const arr1 = [5, 3, 8, 4, 2]
 console.log(quickSortFirst(arr1));
 
