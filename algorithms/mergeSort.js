@@ -2,7 +2,7 @@ let comparisons = 0;
 let mergeOperations = 0;
 let recursiveCalls = 0;
 
-
+ 
 function mergeSort(arr){
     recursiveCalls++;
 
