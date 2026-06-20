@@ -10,7 +10,7 @@ class DynamicArray{
         this.#size = 0;
         this.#CAP_EXPONENT = 2;
         this.#arr = new Uint32Array(initialCapacity);
-    }
+    } 
 
     #resize(newCapacity, fill = 0){
         if(newCapacity < 0) throw new Error("Capasity must be positiv numder");
