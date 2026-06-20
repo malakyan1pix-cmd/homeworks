@@ -1,47 +1,36 @@
 class Node{
-    #next;
-    constructor(value, next = null){
+    value;
+    next;
+
+    constructor(value, next = null) {
         this.value = value;
-        this.#next = next;
-    }
-
-    get next(){
-        return this.#next;
-    }
-
-    set next(node){
-        this.#next = node;
+        this.next = next;
     }
 }
 
-class SinglyLinkedList{
+class CyclicSinglyLinkedList{
     #head;
     constructor(value){
         if(value !== undefined){
             const node = new Node(value);
             this.#head = node;
-            this.#head.next = null;
+            this.#head.next = this.#head;
         }
         else {
             this.#head = null;
         }
     }
-
     empty(){
         return this.#head === null;
     }
-
     size(){
         if(this.empty()) return 0;
-        if(this.#head.next === null) return 1;
-
+        let curr = this.#head; 
         let count = 0;
-        let curr = this.#head;
-
-        while(curr){
+        do{
+            ++count;
             curr = curr.next;
-            count++;
-        }
+        }while(curr !== this.#head)
         return count;
     }
 
@@ -50,15 +39,13 @@ class SinglyLinkedList{
     }
 
     front(){
-        if(this.empty()) throw new Error("Is empty");
+        if(this.empty()) throw new Error("List is Empty");
         return this.#head.value;
     }
-
     back(){
-        if(this.empty()) throw new Error("Is empty");
-
+        if(this.empty()) throw new Error("List is Empty");
         let curr = this.#head;
-        while(curr.next){
+        while(curr.next !== this.#head){
             curr = curr.next;
         }
         return curr.value;
@@ -66,12 +53,12 @@ class SinglyLinkedList{
 
     at(index){
         if(this.empty()) throw new Error("Is empty");
-        if(!Number.isInteger(index)) throw new Error("Index is not integer.");
-        if(index < 0 || index >= this.size()) throw new Error ("Invalid index.");
-
+        if(!Number.isInteger(index)) throw new Error("Index must by en Integer");
+        if(index < 0 || index >= this.size()) throw new Error("Invalid index.");
+        
         let curr = this.#head;
         while(index){
-            --index;
+            --index
             curr = curr.next;
         }
         return curr.value;
@@ -80,68 +67,90 @@ class SinglyLinkedList{
     pushFront(value){
         if(this.empty()){
             this.#head = new Node(value);
+            this.#head.next = this.#head;
             return;
+        }
+
+        let curr = this.#head;
+        while(curr.next !== this.#head){
+            curr = curr.next;
         }
         let node = new Node(value);
         node.next = this.#head;
+        curr.next = node;
         this.#head = node;
     }
 
     pushBack(value){
         if(this.empty()){
             this.#head = new Node(value);
-            return;
-        }
-        if(this.#head.next === null){
-            this.#head.next = new Node(value);
+            this.#head.next = this.#head;
             return;
         }
 
         let curr = this.#head;
-        while(curr.next){
+        while(curr.next !== this.#head){
             curr = curr.next;
         }
-        curr.next = new Node(value);
+        let node = new Node(value);
+        curr.next = node;
+        node.next = this.#head;
     }
 
     popFront(){
-        if (this.empty()) throw new Error("Is empty.");
-        let res = this.#head.value;
-        this.#head = this.#head.next;
-        return res;
-    }
-
-    popBack(){
         if(this.empty()) throw new Error("Is empty.");
-        if(this.#head.next === null){
+        if(this.#head.next === this.#head){
             let res = this.#head.value;
             this.#head = null;
             return res;
         }
+        let res = this.#head.value;
+         let curr = this.#head;
+         while(curr.next !== this.#head){
+            curr = curr.next;
+         }
+         this.#head = this.#head.next;
+         curr.next = this.#head;
+         return res;
+    }
 
+    popBack(){
+        if(this.empty()) throw new Error("Is empty.");
+        if(this.#head.next === this.#head){
+            let res = this.#head.value;
+            this.#head = null;
+            return res;
+        }
         let curr = this.#head;
-        while(curr.next.next){
+        while(curr.next.next !== this.#head){
             curr = curr.next;
         }
         let res = curr.next.value;
-        curr.next = null;
+        curr.next = this.#head;
         return res;
     }
 
     insert(index, value){
         if(!Number.isInteger(index)) throw new Error("Index is not integer.");
-        if(index < 0 || index > this.size()) throw new Error("Invalid index.");
+
+        let size = this.size();
+        if(index < 0 || index > size) throw new Error("Invalid index.");
 
         if(index === 0){
             this.pushFront(value);
             return;
         }
-        let curr = this.#head;
-        while(index > 1){
-            curr = curr.next;
-            --index;
+
+        if(index === size){
+            this.pushBack(value);
+            return;
         }
-        
+        let curr = this.#head;
+
+        while(--index > 0){
+            curr = curr.next;
+        }
+
         let node = new Node(value);
         node.next = curr.next;
         curr.next = node;
@@ -150,18 +159,21 @@ class SinglyLinkedList{
     erase(index){
         if(this.empty()) throw new Error("Is empty");
         if(!Number.isInteger(index)) throw new Error("Index is not integer.");
-        if(index < 0 || index >= this.size()) throw new Error("Invalid index.");
+
+        let size = this.size();
+        if(index < 0 || index >= size) throw new Error("Invalid index.");
 
         if(index === 0){
             return this.popFront();
-            
+        }
+        if(index === size - 1){
+            return this.popBack();
+        }
+        let curr = this.#head;
+        while(--index > 0){
+            curr = curr.next;
         }
 
-        let curr = this.#head;
-        while (index > 1) {
-            curr = curr.next;
-            --index;
-        }
         let res = curr.next.value;
         curr.next = curr.next.next;
         return res;
@@ -177,7 +189,7 @@ class SinglyLinkedList{
             }
             idx++;
             curr = curr.next;
-        }while(curr !== null);
+        }while(curr !== this.#head);
         return -1;
     }
 
@@ -189,7 +201,7 @@ class SinglyLinkedList{
                 return true;
             }
             curr = curr.next;
-        }while(curr !== null);
+        }while(curr !== this.#head);
         return false;
     }
 
@@ -199,23 +211,26 @@ class SinglyLinkedList{
         let curr = this.#head;
         let i = 0;
 
-        while(curr){
+        do{
             arr[i++] = curr.value;
             curr = curr.next;
-        }
+        }while(curr !== this.#head)
         return arr;
     }
 
     reverse(){
-        let prev = null;
-        let curr = this.#head;
+        if(this.empty() || this.#head.next === this.#head) return;
 
-        while(curr){
+        let prev = this.#head;
+        let curr = this.#head.next;
+        const start = this.#head;
+        do{
             let next = curr.next;
             curr.next = prev;
             prev = curr;
             curr = next;
-        }
+        }while(curr !== start);
+        this.#head.next = prev;
         this.#head = prev;
     }
 
@@ -226,7 +241,7 @@ class SinglyLinkedList{
         do{
             yield curr.value;
             curr = curr.next;
-        }while(curr !== null);
+        }while(curr !== this.#head);
     }
 
     *entries(){
@@ -239,39 +254,27 @@ class SinglyLinkedList{
             yield [idx, curr.value];
             ++idx;
             curr = curr.next;
-        }while(curr !== null);
+        }while(curr !== this.#head);
     }
 }
 
-const list = new SinglyLinkedList();
-
+const list = new CyclicSinglyLinkedList();
 
 list.pushBack(10);
-
 list.pushBack(20);
-
 list.pushBack(30);
-
 
 list.insert(1, 15);
 
-
 console.log(list.toArray());
-
 // [10, 15, 20, 30]
-
 
 list.erase(2);
 
-
 console.log(list.toArray());
-
 // [10, 15, 30]
-
 
 list.reverse();
 
-
 console.log(list.toArray());
-
-// [30, 15, 10]
+// [30, 15, 10] 
