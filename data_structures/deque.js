@@ -119,7 +119,7 @@ class BucketedDeque {
             arr.push(this.at(i));
         }
         return arr;
-    }
+    } 
 
     at(globalIndex) {
         let { localIdx, buckIdx } = this._bucketIndex(globalIndex);
