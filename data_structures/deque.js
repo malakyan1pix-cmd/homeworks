@@ -1,4 +1,4 @@
-class BucketedDeque {
+ export class BucketedDeque {
     #everyBucketsLength;
     #bucketSize;
     #buckets;
