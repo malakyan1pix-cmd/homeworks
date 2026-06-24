@@ -1,4 +1,4 @@
-class DynamicArray{
+export class DynamicArray{
     #arr;
     #size;
     #capacity;
@@ -11,6 +11,14 @@ class DynamicArray{
         this.#CAP_EXPONENT = 2;
         this.#arr = new Uint32Array(initialCapacity);
     } 
+
+    size(){
+        return this.#size;
+    }
+
+    capacity(){
+        return this.#capacity;
+    }
 
     #resize(newCapacity, fill = 0){
         if(newCapacity < 0) throw new Error("Capasity must be positiv numder");
@@ -38,8 +46,10 @@ class DynamicArray{
     }
 
     popBack(){
-        if(this.#size == 0) return;
-        this.#size--;
+        if(this.isEmpty()) throw new Error("Is empty.");
+        let res = this.#arr[--this.#size];
+        this.#arr[this.#size] = 0;
+        return res;
     }
 
     erase(index){
@@ -57,7 +67,7 @@ class DynamicArray{
         return this.#arr[index];
     }
 
-    empty(){
+    isEmpty(){
         return this.#size === 0;
     }
 
@@ -73,12 +83,12 @@ class DynamicArray{
     }
 
     front(){
-        if(this.empty()) return undefined;
+        if(this.isEmpty()) return undefined;
         return this.#arr[0];
     }
 
     back(){
-        if(this.empty()) return undefined;
+        if(this.isEmpty()) return undefined;
         return this.#arr[this.#size - 1];
     }
 
@@ -265,3 +275,5 @@ class DynamicArray{
         return false;
     }
 }
+
+
