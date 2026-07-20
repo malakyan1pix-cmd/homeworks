@@ -122,6 +122,9 @@
     } 
 
     at(globalIndex) {
+        if(!Number.isInteger(globalIndex) || globalIndex < 0 || globalIndex >= this.#size){
+            throw new Error("Invalid index.")
+        }
         let { localIdx, buckIdx } = this._bucketIndex(globalIndex);
         return this.#buckets[buckIdx][localIdx];
     }
