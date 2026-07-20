@@ -37,13 +37,13 @@ class CircularQueue {
         }
         
         const idx = (this.#size + this.#front) % this.#data.capacity();
-        this.#data[idx] = value;
+        this.#data.setValue(idx, value);
         this.#size++;
     }
     
     dequeue() {
         if(this.isEmpty()) throw new Error("Queue is empty.");
-        const value = this.#data[this.#front];
+        const value = this.#data.at(this.#front);
         
         this.#data[this.#front] = undefined;
         this.#front = (this.#front + 1) % this.#data.capacity();
@@ -54,14 +54,14 @@ class CircularQueue {
     
     front() {
         if(this.isEmpty()) throw new Error("Queue is empty.");
-        return this.#data[this.#front];
+        return this.#data.at[this.#front];
     }
     
     back() {
         if(this.isEmpty()) throw new Error("Queue is empty.");
         
         const idx = (this.#front + this.#size - 1) % this.#data.capacity();
-        return this.#data[idx];
+        return this.#data.at[idx];
     }
     
     #grow() {
@@ -70,7 +70,7 @@ class CircularQueue {
         
         for(let i = 0; i < this.#size; i++){
             let idx = (this.#front + i) % this.#data.capacity();
-            newData[i] = this.#data[idx];
+            newData.setValue(i, this.#data.at(idx));
         }
         
         this.#data = newData;
@@ -81,7 +81,7 @@ class CircularQueue {
         const arr = [];
         for(let i = 0; i < this.#size; i++){
             let idx = (this.#front + i) % this.#data.capacity();
-            arr.push(this.#data[idx]);
+            arr.push(this.#data.at(idx));
         }
         return arr;
     }
@@ -92,7 +92,13 @@ class CircularQueue {
     
     *[Symbol.iterator]() {
         for(let i = 0; i < this.#size; i++){
-            yield this.#data[(this.#front + i) % this.#data.capacity()];
+            yield this.#data.at((this.#front + i) % this.#data.capacity());
         }
     }
 }
+
+const a = new CircularQueue(10);
+a.enqueue(10);
+a.enqueue(20);
+a.enqueue(30);
+console.log(a.toArray());
