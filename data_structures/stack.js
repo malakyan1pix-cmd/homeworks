@@ -38,11 +38,21 @@ class Stack {
   }
 
   toArray() {
-    return this.#data.toArray();
+    const arr = this.#data.toArray();
+    const res = [];
+
+    for (let i = arr.length - 1; i >= 0; --i) {
+      res.push(arr[i]);
+    }
+    return res;
   }
 
 
-  [Symbol.iterator]() {
-    return this.#data[Symbol.iterator]();
+  *[Symbol.iterator]() {
+    const arr = this.#data.toArray();
+
+    for (let i = arr.length - 1; i >= 0; --i) {
+      yield arr[i];
+    }
   }
 }
