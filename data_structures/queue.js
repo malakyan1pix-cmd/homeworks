@@ -1,5 +1,5 @@
 import { BucketedDeque } from "./deque.js"
-class Queue {
+export class Queue {
   #data;
   #size;
 
