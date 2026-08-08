@@ -93,7 +93,7 @@ class HashTable {
         this.#size++;
         bucket.size++;
         
-        if (this.loadFactor() >= this.#loadFactor) {
+        if (this.loadFactor() > this.#loadFactor) {
             this.#resize(this.#capacity * 2);
         }
     }
@@ -242,8 +242,7 @@ class HashTable {
     bucketSizes() {
         let res = [];
         for (let i = 0; i < this.#capacity; i++) {
-            let bucket = this.#table[i];
-            res.push(bucket.size());
+            res.push(this.#table[i].size);
         }
         return res;
     }
@@ -277,5 +276,31 @@ class HashTable {
             cap++;
         }
         return cap;
+    }
+
+    toObject () {
+        const obj = {};
+        for (let [key, value] of this) {
+            obj[key] = value;
+        }
+        return obj;
+    }
+
+    clone () {
+        const copy = new HashTable(this.#capacity, this.#loadFactor);
+        for (let [key, value] of this) {
+            copy.put(key, value);
+        }
+        return copy;
+    }
+
+    equals (otherTable) {
+        if (!(otherTable instanceof HashTable)) return false;
+        if (this.#size !== otherTable.size()) return false;
+        for (let [key, value] of this) {
+            if (!otherTable.containsKey(key)) return false;
+            if (otherTable.get(key) !== value) return false;
+        } 
+        return true;
     }
 }
